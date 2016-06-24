@@ -138,7 +138,7 @@
         // setting up event delegation
         setupEvents: function () {
             // event on header delegated to buttons
-            document.getElementById('clickers-clicking-game').addEventListener('click', function (e) {
+            document.getElementById('clicker-clicker-game').addEventListener('click', function (e) {
                 if (e.target && e.target.matches('button.pause-button')) {
                     PauseButton.handleEvent();
                 } else if (e.target && e.target.matches('.clicker-button')) {
