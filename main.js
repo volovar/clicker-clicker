@@ -26,7 +26,6 @@
         },
 
         handleEvent: function() {
-            console.log("inside clicker event");
             Player.addToScore(this.getButtonValue());
         }
     }
@@ -46,7 +45,6 @@
         handleEvent: function () {
             // pause game if it's running and
             // restart is paused
-            console.log("inside pause event");
             if (Game.getIsPaused()) {
                 Game.start();
             } else {
@@ -69,7 +67,6 @@
             Util.createNewElement(options);
 
             this.scoreBoard = document.getElementsByClassName("score-board")[0];
-            console.log(this.scoreBoard);
         },
 
         displayScore: function (score) {
@@ -111,7 +108,7 @@
             PauseButton.create();
             Settings.create();
             this.setupEvents();
-            console.log('Game is setup and ready to go');
+            console.log('Game is setup and ready to start');
         },
 
         start: function () {
@@ -137,7 +134,7 @@
 
         // setting up event delegation
         setupEvents: function () {
-            // event on header delegated to buttons
+            // event on game container delegated to buttons
             document.getElementById('clicker-clicker-game').addEventListener('click', function (e) {
                 if (e.target && e.target.matches('button.pause-button')) {
                     PauseButton.handleEvent();
@@ -162,7 +159,13 @@
 
         addToScore: function (score) {
             var newScore = this.getScore() + score;
-            this.setScore(newScore);
+
+            // don't let the score go below zero
+            if (newScore > 0) {
+                this.setScore(newScore);
+            } else {
+                this.setScore(0);
+            }
         },
 
         lowerScore: function (score) {
